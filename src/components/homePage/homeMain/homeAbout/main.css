@@ -1,0 +1,31 @@
+
+.card-info-content {
+  background-color: rgb(234, 234, 234);
+}
+.card-info-content i {
+  font-size: 45px;
+}
+.card-info-content i,
+.card-info-content strong {
+  color: #f50136;
+}
+.card-info-content i,
+.card-info-content h4,
+.card-info-content p {
+  margin-bottom: 15px;
+}
+.card-info-content p {
+  font-size: 14px;
+}
+.card-info-content {
+  cursor: pointer;
+  transition: 0.5s;
+}
+.card-info-content:hover {
+  color: white;
+  background-color: #f50136;
+}
+.card-info-content:hover i,
+.card-info-content:hover strong {
+  color: white;
+}

@@ -1,0 +1,14 @@
+.countEvent {
+  background-image: url(../../../../assets/banner/bg-img.png.webp);
+}
+.content ul li {
+  background-color: #f44336;
+  color: white;
+  padding: 20px;
+  width: 150px;
+  height: 150px;
+}
+.content ul li h4 {
+  font-size: 40px;
+  font-weight: 700;
+}

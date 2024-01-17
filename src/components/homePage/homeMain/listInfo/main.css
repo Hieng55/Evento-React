@@ -1,0 +1,15 @@
+.list-info ul li{
+    display: flex; 
+    align-items: center;
+    gap: 15px;
+}
+.list-info ul li i{
+    font-size: 30px;
+    color: #f50136;
+}
+.list-info ul li h5{
+    font-weight: 600;
+}
+.list-info ul li p{
+    color: gray;
+}

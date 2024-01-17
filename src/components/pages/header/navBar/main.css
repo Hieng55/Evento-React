@@ -1,0 +1,10 @@
+.navbar-menu li:hover {
+  color: #f50136;
+  cursor: pointer;
+}
+.navbar-menu li {
+  font-size: 13px;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  transition: 0.5s;
+}
