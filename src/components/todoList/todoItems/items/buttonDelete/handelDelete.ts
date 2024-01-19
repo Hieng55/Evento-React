@@ -1,5 +1,4 @@
-
-import { TypeProps, UseHandleAddProps } from "../../interface";
+import { TypeProps, UseHandleAddProps } from "../../../interface";
 
 export function useHandelDelete(listItems: Pick<TypeProps, "value">[], setListItem: Pick<UseHandleAddProps, "setListItem">["setListItem"]) {
   function handelDelete(index: number) {
