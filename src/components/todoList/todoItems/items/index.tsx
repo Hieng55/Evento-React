@@ -1,6 +1,6 @@
 import { TypeProps, UseHandleAddProps } from "../../interface";
 import { StyleItem } from "./style";
-import { HandelDelete } from "../handelDelete/index";
+import { HandelDelete } from "../buttonDelete/index";
 import { useHandelDelete } from "./handelDelete";
 import { useHandelChecked } from "./handelChecked";
 export const TodoItems: React.FC<{ listItems:TypeProps[]; setListItem: Pick<UseHandleAddProps, "setListItem">["setListItem"] }> = ({
