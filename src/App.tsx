@@ -1,11 +1,11 @@
 import "./app.css";
-import { Home } from "./components/homePage/home";
+import TodoList from "./components/todoList/todo/input";
 
 function App() {
   return (
-    <>
-      <Home />
-    </>
+    <div className="h-screen w-full flex items-center justify-center">
+      <TodoList />
+    </div>
   );
 }
 
