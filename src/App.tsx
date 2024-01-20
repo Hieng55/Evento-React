@@ -1,10 +1,10 @@
 import "./app.css";
-import { Todo } from "./components/todo/index";
+import { Counter } from "./components/counter/counter";
 
 function App() {
   return (
     <div className="h-screen w-full flex items-center justify-center">
-      <Todo />
+      <Counter />
     </div>
   );
 }
