@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 
 export const Counter = () => {
-  const [count, setCount] = useState<number>(3);
+  const [count, setCount] = useState<number>(4);
   const intervalId = useRef<number | undefined>(undefined);
   function play() {
     intervalId.current = setInterval(() => {
@@ -19,7 +19,7 @@ export const Counter = () => {
   }
   function reset() {
     clearInterval(intervalId.current);
-    setCount(3);
+    setCount(4);
   }
   return (
     <div>
