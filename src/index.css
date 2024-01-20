@@ -2,19 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-.title-head::before {
-  content: "";
-  position: absolute;
-  width: 30px;
-  height: 3px;
-  background-color: #f50136;
-  top: -10px;
-  border-radius: 10px;
-}
-.btn {
-  background-color: #f50136;
-  transition: 0.5s;
-}
-.btn:hover {
-  background-color: rgb(16, 16, 16);
-}
