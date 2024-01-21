@@ -1,30 +1,28 @@
-import { useRef, useState } from "react";
-
+import { useEffect, useState } from "react";
 export const Counter = () => {
   const [count, setCount] = useState<number>(4);
   const [isHidden, setIsHidden] = useState<boolean>(false);
-  const intervalId = useRef<number | undefined>(undefined);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  useEffect(() => {
+    let idInterVal: number;
+    if (isRunning) {
+      idInterVal = setInterval(() => {
+        count === 0 ? clearInterval(idInterVal) : setCount(count - 1);
+      }, 1000);
+    }
+    return () => clearInterval(idInterVal);
+  }, [count, isRunning]);
   function play() {
+    setIsRunning(true);
     setIsHidden(true);
-    intervalId.current = setInterval(() => {
-      setCount((prevCount) => {
-        if (prevCount === 0) {
-          clearInterval(intervalId.current);
-          return prevCount;
-        }
-        return prevCount - 1;
-      });
-    }, 1000);
   }
   function pause() {
-    console.log("pause");
-
     setIsHidden(false);
-    clearInterval(intervalId.current);
+    setIsRunning(false);
   }
   function reset() {
     setIsHidden(false);
-    clearInterval(intervalId.current);
+    setIsRunning(false);
     setCount(4);
   }
 
