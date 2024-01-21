@@ -30,15 +30,10 @@ export const Counter = () => {
     <div>
       <h3 className="text-center text-2xl mb-2">{count}</h3>
       <div className="flex gap-1">
-        {!isHidden ? (
-          <button onClick={play} className="text-white bg-orange-500 p-2">
-            Play
-          </button>
-        ) : (
-          <button onClick={pause} className="text-white bg-orange-500 p-2">
-            Pause
-          </button>
-        )}
+        <button onClick={!isHidden ? play : pause} className="text-white bg-orange-500 p-2">
+          {!isHidden ? "Play" : "Pause"}
+        </button>
+
         <button onClick={reset} className="text-white bg-orange-500 p-2">
           Reset
         </button>
