@@ -2,3 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .menu-text {
+    @apply text-xs h-full flex-columns pl-2 pr-2 font-semibold text-ctBlue7 hover:text-ctGreen5 transition duration-500 cursor-pointer;
+  }
+  .flex-columns {
+    @apply flex items-center;
+  }
+  .round {
+    @apply rounded-full p-2 cursor-pointer;
+  }
+  .round-blue {
+    @apply bg-ctBlue1;
+  }
+  .round-orange2 {
+    @apply bg-ctOrange2;
+  }
+  .round-orange1 {
+    @apply bg-ctOrange1;
+  }
+  .button-hover-success {
+    @apply hover:bg-ctGreen5 hover:text-white transition duration-500 cursor-pointer;
+  }
+  .position-center {
+    @apply top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  }
+}
