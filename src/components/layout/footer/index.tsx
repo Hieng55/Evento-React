@@ -1,4 +1,3 @@
-
 import { Input } from "./../../shared/input/index";
 import Button from "./../../shared/button/index";
 import { Facebook } from "../../icons/socialMedia/Facebook";
@@ -47,7 +46,10 @@ export const Footer = () => {
             <h4 className="text-base font-semibold">HOT CATEGORIES</h4>
             <ul className="m-3 ml-0 font-light">
               {listCategories.map((item) => (
-                <li className="text-sm mb-2 transition duration-500 ease-in-out cursor-pointer hover:pl-1 hover:text-orange-600 hover:font-semibold ">
+                <li
+                  key={item}
+                  className="text-sm mb-2 transition duration-500 ease-in-out cursor-pointer hover:pl-1 hover:text-orange-600 hover:font-semibold "
+                >
                   {item}
                 </li>
               ))}
@@ -60,14 +62,8 @@ export const Footer = () => {
               updates on new arrivals & other information.
             </p>
             <div className="group-email relative ">
-              <Input
-                placeholder="Your email address..."
-                type="primary"
-                className="pl-2 bg-white focus:shadow-ctShadow1 "
-                height="h-12"
-                width="w-full"
-              />
-              <Button text="Subscribe" className="absolute right-2 top-1/2 -translate-y-1/2 bg-ctGreen6" width="w-24" />
+              <Input placeholder="Your email address..." focus="primary"  className="focus:shadow-ctShadow1 h-12 rounded text-black text-sm" fullWidth />
+              <Button className="absolute right-2 top-1/2 -translate-y-1/2 bg-ctGreen6 px-2 py-2 rounded">Subscribe</Button>
             </div>
           </div>
         </div>

@@ -1,21 +1,40 @@
-import { useEffect, useState } from "react";
-import Button from "../../../shared/button";
-import { getData } from "../../../services/apiService";
-import { ApiResponse } from "../../../services/interFaceApi";
+import { useEffect } from "react";
+import Button from "../../shared/button/index";
+import { createProduct, getProducts, updateProduct } from "../../services/callApi";
+import { Cart, PropsCards } from "./interface";
 
-export const Cards = () => {
-  const [data, setData] = useState<ApiResponse[] | null>([]);
+export const Cards: React.FC<PropsCards> = ({ data, setCarts, carts }) => {
+  console.log("rênder card");
   useEffect(() => {
-    const fetchData = async () => {
-      const dataRes = await getData();
-      setData(dataRes);
-    };
-    fetchData();
-  }, []);
+    getProducts("carts").then((res) => {
+      setCarts(res);
+    });
+  }, [setCarts]);
+
+  function handleAddCart(id: number | string) {
+    const product = data.find((product) => product.id === id);
+    const cartFind = carts.find((cart) => cart.id === id);
+
+    if (product) {
+      const cart: Cart = {
+        ...product,
+        quantity: 1,
+      };
+
+      if (cartFind) {
+        const cartUpdate: Cart = { ...cart, quantity: (cartFind.quantity || 0) + 1 };
+        updateProduct(cartUpdate.id, cartUpdate, "carts");
+        setCarts([...carts, cartUpdate]);
+      } else {
+        createProduct(cart, "carts");
+        setCarts([...carts, cart]);
+      }
+    }
+  }
 
   return (
     <div className="shop-product mt-5 flex flex-wrap gap-5 justify-center pt-7 pb-7">
-      {data
+      {data.length > 0
         ? data.map((item) => {
             return (
               <div key={item.id} className="card w-1/5 hover:shadow-ctShadow1 transition duration-500 cursor-pointer">
@@ -29,12 +48,20 @@ export const Cards = () => {
                     <span className="text-red-600 font-semibold mr-2">${item.price}</span>
                     <del className="text-slate-500 text-sm">${item.price}</del>
                   </h4>
-                  <Button text="ADD CART" width="w-full" className="bg-ctGreen5 mt-2" />
+                  <Button
+                    onClick={() => {
+                      handleAddCart(item.id);
+                    }}
+                    fullWidth
+                    className="bg-ctGreen5 mt-2 h-10 rounded"
+                  >
+                    ADD CART
+                  </Button>
                 </div>
               </div>
             );
           })
-        : "loading"}
+        : "no product"}
     </div>
   );
 };
