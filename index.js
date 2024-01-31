@@ -5,23 +5,15 @@ const server = jsonServer.create();
 const router = jsonServer.router("data.json");
 const middlewares = jsonServer.defaults();
 
-// Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares);
 
-// Add custom routes before JSON Server router
 server.get("/echo", (req, res) => {
   res.jsonp(req.query);
 });
 
-// To handle POST, PUT and PATCH you need to use a body-parser
-// You can use the one used by JSON Server
 server.use(auth);
 server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
-  // if (req.method === "POST") {
-  //   req.body.createdAt = Date.now();
-  //   req.body.updatedAt = Date.now();
-  // }
   console.log({
     req: req,
   });
@@ -42,6 +34,7 @@ router.render = (req, res) => {
         _totalRows: Number.parseInt(totalCountHeader),
       },
     };
+    console.log(results);
     return res.jsonp(results);
   }
   return res.jsonp(res.locals.data);
