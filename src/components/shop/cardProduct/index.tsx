@@ -1,33 +1,25 @@
-import { useEffect } from "react";
 import Button from "../../shared/button/index";
-import { createProduct, getProducts, updateProduct } from "../../services/callApi";
+import { createProduct, updateProduct } from "../../services/callApi";
 import { Cart, PropsCards } from "./interface";
 
 export const Cards: React.FC<PropsCards> = ({ data, setCarts, carts }) => {
-  console.log("rênder card");
-  useEffect(() => {
-    getProducts("carts").then((res) => {
-      setCarts(res);
-    });
-  }, [setCarts]);
-
   function handleAddCart(id: number | string) {
     const product = data.find((product) => product.id === id);
-    const cartFind = carts.find((cart) => cart.id === id);
 
+    const existingCart = carts.find((cart) => cart.id === id);
     if (product) {
-      const cart: Cart = {
+      const updatedCart: Cart = {
         ...product,
-        quantity: 1,
+        quantity: existingCart ? existingCart.quantity + 1 : 1,
       };
-
-      if (cartFind) {
-        const cartUpdate: Cart = { ...cart, quantity: (cartFind.quantity || 0) + 1 };
-        updateProduct(cartUpdate.id, cartUpdate, "carts");
-        setCarts([...carts, cartUpdate]);
+      if (existingCart) {
+        console.log("Updating existing cart");
+        updateProduct(updatedCart.id, updatedCart, "carts");
+        setCarts((prevCarts) => prevCarts.map((cartCurrent) => (cartCurrent.id === updatedCart.id ? updatedCart : cartCurrent)));
       } else {
-        createProduct(cart, "carts");
-        setCarts([...carts, cart]);
+        console.log("Adding new cart");
+        createProduct(updatedCart, "carts");
+        setCarts([...carts, updatedCart]);
       }
     }
   }
@@ -53,7 +45,7 @@ export const Cards: React.FC<PropsCards> = ({ data, setCarts, carts }) => {
                       handleAddCart(item.id);
                     }}
                     fullWidth
-                    className="bg-ctGreen5 mt-2 h-10 rounded"
+                    className="bg-ctGreen5 mt-2 rounded"
                   >
                     ADD CART
                   </Button>

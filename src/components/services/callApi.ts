@@ -1,23 +1,24 @@
 import restClient from "./apiService";
+import { ApiResponse } from "./interFaceApi";
 
-export function getProducts(link: string, params?: object) {
+export function getData(link: string, params?: object) {
   return restClient({
     url: `${link}`,
     params,
   });
 }
-export function createProduct(productData: object, link: string) {
+export function createProduct(productData: ApiResponse, link: string) {
   return restClient({
     url: `${link}`,
     method: "POST",
-    data:  productData ,
+    data: productData,
   });
 }
 
-export function updateProduct(id: number | string, updateData: object, link: string) {
+export function updateProduct(id: number | string, updateData: ApiResponse, link: string) {
   return restClient({
     url: `${link}/${id}`,
     method: "PUT",
-    data:  updateData ,
+    data: updateData,
   });
 }

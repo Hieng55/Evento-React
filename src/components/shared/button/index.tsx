@@ -15,8 +15,8 @@ const variantsStyles = cva(["border text-white"], {
       error: "bg-red-500 text-white hover:opacity-80",
     },
     size: {
-      small: "text-sm",
-      medium: "text-xl",
+      small: "px-2 py-2",
+      medium: "px-5 py-5",
     },
     fullWidth: {
       true: "w-full",

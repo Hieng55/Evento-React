@@ -62,8 +62,14 @@ export const Footer = () => {
               updates on new arrivals & other information.
             </p>
             <div className="group-email relative ">
-              <Input placeholder="Your email address..." focus="primary"  className="focus:shadow-ctShadow1 h-12 rounded text-black text-sm" fullWidth />
-              <Button className="absolute right-2 top-1/2 -translate-y-1/2 bg-ctGreen6 px-2 py-2 rounded">Subscribe</Button>
+              <Input
+                placeholder="Your email address..."
+                focus="primary"
+                sizeInput="large"
+                className="focus:shadow-ctShadow1 h-12 rounded text-black text-sm"
+                fullWidth
+              />
+              <Button className="absolute right-2 top-1/2 -translate-y-1/2 bg-ctGreen6 rounded">Subscribe</Button>
             </div>
           </div>
         </div>

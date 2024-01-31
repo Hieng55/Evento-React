@@ -12,7 +12,7 @@ export default function restClient({
   url: string;
   method?: "POST" | "GET" | "PUT" | "PATCH" | "DELETE";
   params?: object;
-  data: ApiResponse[];
+  data?: ApiResponse;
 }) {
   return axios({
     url: `${API_URL}/${url}`,

@@ -12,8 +12,6 @@ interface PropsHeader {
   carts: Cart[];
 }
 export const Header: React.FC<PropsHeader> = ({ setValue, value, carts }) => {
-  console.log("render header");
-
   const menuList = ["HOME", "SHOP", "BLOG", "ABOUT US", "CONTACT"];
 
   return (
@@ -53,7 +51,7 @@ export const Header: React.FC<PropsHeader> = ({ setValue, value, carts }) => {
                 <Search className="w-5 h-5 text-white" />
               </Button>
             </div>
-            <Button className="px-3 py-3 rounded-full bg-red-500">
+            <Button className="px-3 py-3 rounded-full bg-red-600">
               <User className="w-5 h-5 text-white" />
             </Button>
 
