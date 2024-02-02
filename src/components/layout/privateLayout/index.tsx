@@ -6,8 +6,7 @@ import { useEffect } from "react";
 export const PrivateLayout = () => {
   console.log("render");
   const navigate = useNavigate();
-  const location = useLocation();
-  const params = Object.fromEntries(new URLSearchParams(location.search).entries());
+  const params = Object.fromEntries(new URLSearchParams(useLocation().search));
   useEffect(() => {
     if (params.login !== "true") {
       navigate(`/login/?login=false`);
