@@ -8,7 +8,6 @@ export const PrivateLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const params = Object.fromEntries(new URLSearchParams(location.search).entries());
-  params.login = "true";
   useEffect(() => {
     if (params.login !== "true") {
       navigate(`/login/?login=false`);
