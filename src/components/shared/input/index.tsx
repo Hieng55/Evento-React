@@ -8,7 +8,7 @@ interface PropsInput extends React.InputHTMLAttributes<HTMLInputElement> {
   fullWidth?: boolean;
 }
 
-const variantsStylesInput = cva(["outline-none border-2 border-solid pl-2"], {
+const variantsStylesInput = cva(["px-2 outline-none border-2 border-solid pl-2"], {
   variants: {
     focus: {
       primary: "focus:border-ctBlue5",

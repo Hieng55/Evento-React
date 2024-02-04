@@ -1,14 +1,26 @@
 import Button from "../../shared/button/index";
 import { createProduct, updateProduct } from "../../services/callApi";
-import { Cart, PropsCards } from "./interface";
 
-export const Cards: React.FC<PropsCards> = ({ data, setCarts, carts }) => {
+import { useAppSelector } from "../../Utils/redux";
+import { getProductsData } from "../../redux/reducer/productDataReducer";
+
+import { Cart } from "./interface";
+
+interface PropsCards {
+  setCarts: React.Dispatch<React.SetStateAction<Cart[]>>;
+  carts: Cart[];
+}
+
+export const Cards = ({ setCarts, carts }: PropsCards) => {
+  const products = useAppSelector(getProductsData);
   function handleAddCart(id: number | string) {
-    const product = data.find((product) => product.id === id);
+    const product = products.find((product) => product.id === id);
 
     const existingCart = carts.find((cart) => cart.id === id);
+    console.log(carts);
+
     if (product) {
-      const updatedCart: Cart = {
+      const updatedCart = {
         ...product,
         quantity: existingCart ? existingCart.quantity + 1 : 1,
       };
@@ -26,8 +38,8 @@ export const Cards: React.FC<PropsCards> = ({ data, setCarts, carts }) => {
 
   return (
     <div className="shop-product mt-5 flex flex-wrap gap-5 justify-center pt-7 pb-7">
-      {data.length > 0
-        ? data.map((item) => {
+      {products.length > 0
+        ? products.map((item) => {
             return (
               <div key={item.id} className="card w-1/5 hover:shadow-ctShadow1 transition duration-500 cursor-pointer">
                 <div className="image overflow-hidden h-60 ">

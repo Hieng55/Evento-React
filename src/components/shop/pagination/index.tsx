@@ -1,24 +1,19 @@
 import { useRef } from "react";
 import Button from "./../../shared/button/index";
-import { TPagination } from "./interface";
-import { ApiResponse } from "../../services/interFaceApi";
+import { useAppDispatch, useAppSelector } from "../../Utils/redux";
+import { getPagination } from "../../redux/reducer/paginationReducer";
+import { setPagination } from "../../redux/action/action";
 
-interface PropsPagination {
-  pagination: TPagination;
-  products: ApiResponse[];
-  perPage: React.MutableRefObject<number>;
-  setPagination: React.Dispatch<React.SetStateAction<TPagination>>;
-}
-
-export const Pagination: React.FC<PropsPagination> = ({ pagination, products, perPage, setPagination }) => {
+export const Pagination = () => {
+  const dispatch = useAppDispatch();
   const totalPagination = useRef<number | null>(null);
+  const pagination = useAppSelector(getPagination);
+  console.log(pagination);
 
-  if (pagination._totalRows && products) {
-    totalPagination.current = Math.ceil(pagination._totalRows / perPage.current);
-  }
+  totalPagination.current = pagination && pagination._totalRows && pagination._limit ? Math.ceil(pagination._totalRows / pagination._limit) : 0;
 
   function handlePageChange(page: number) {
-    setPagination({ ...pagination, _page: page });
+    dispatch(setPagination({ _page: page }));
   }
   return (
     <div className="pagination flex justify-center gap-2">

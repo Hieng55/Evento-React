@@ -1,19 +1,25 @@
 import logo from "../../../assets/logo/logo.png";
+import { useAppDispatch, useAppSelector } from "../../Utils/redux";
 import { CartIcon } from "../../icons/info/Cart";
 import { Search } from "../../icons/info/Search";
 import { User } from "../../icons/info/User";
-import { Cart } from "../../shop/cardProduct/interface";
+import { setSearchValue } from "../../redux/action/action";
+
+import {} from "../../redux/reducer/productDataReducer";
+import { getSearchValue } from "../../redux/reducer/searchReducer";
+
 import Button from "./../../shared/button/index";
 import { Input } from "./../../shared/input/index";
-
-interface PropsHeader {
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  value: string;
+import { Cart } from "../../shop/cardProduct/interface";
+interface propsHeader {
   carts: Cart[];
 }
-export const Header: React.FC<PropsHeader> = ({ setValue, value, carts }) => {
-  const menuList = ["HOME", "SHOP", "BLOG", "ABOUT US", "CONTACT"];
+export const Header = ({ carts }: propsHeader) => {
+  console.log(carts);
 
+  const menuList = ["HOME", "SHOP", "BLOG", "ABOUT US", "CONTACT"];
+  const value = useAppSelector(getSearchValue);
+  const dispatch = useAppDispatch();
   return (
     <>
       <div
@@ -41,10 +47,7 @@ export const Header: React.FC<PropsHeader> = ({ setValue, value, carts }) => {
                 sizeInput="large"
                 value={value}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setValue(e.target.value);
-                }}
-                onBlur={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setValue(e.target.value.trim());
+                  dispatch(setSearchValue(e.target.value));
                 }}
               />
               <Button className="px-3 py-3 rounded-md bg-ctBlue6">
