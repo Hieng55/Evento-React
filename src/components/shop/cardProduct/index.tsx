@@ -1,37 +1,30 @@
-import Button from "../../shared/button/index";
-import { createProduct, updateProduct } from "../../services/callApi";
+import { createProduct, updateProduct } from "../../../services/callApi";
+import Button from "../../../shared/button";
+import { useAppDispatch, useAppSelector } from "../../../Utils/redux";
+import { getCartSuccess } from "../../../redux/reducer/cartSlice/index.js";
 
-import { useAppSelector } from "../../Utils/redux";
-import { getProductsData } from "../../redux/reducer/productDataReducer";
+export const Cards = () => {
+  const { products } = useAppSelector((state) => state.products);
+  const { carts } = useAppSelector((state) => state.carts);
+  const dispatch = useAppDispatch();
 
-import { Cart } from "./interface";
-
-interface PropsCards {
-  setCarts: React.Dispatch<React.SetStateAction<Cart[]>>;
-  carts: Cart[];
-}
-
-export const Cards = ({ setCarts, carts }: PropsCards) => {
-  const products = useAppSelector(getProductsData);
   function handleAddCart(id: number | string) {
     const product = products.find((product) => product.id === id);
-
     const existingCart = carts.find((cart) => cart.id === id);
-    console.log(carts);
-
     if (product) {
       const updatedCart = {
         ...product,
         quantity: existingCart ? existingCart.quantity + 1 : 1,
       };
+
       if (existingCart) {
-        console.log("Updating existing cart");
         updateProduct(updatedCart.id, updatedCart, "carts");
-        setCarts((prevCarts) => prevCarts.map((cartCurrent) => (cartCurrent.id === updatedCart.id ? updatedCart : cartCurrent)));
+        const updatedCarts = carts.map((cart) => (cart.id === updatedCart.id ? updatedCart : cart));
+        dispatch(getCartSuccess({ carts: updatedCarts }));
       } else {
-        console.log("Adding new cart");
         createProduct(updatedCart, "carts");
-        setCarts([...carts, updatedCart]);
+        const newCartsArray = [...carts, updatedCart];
+        dispatch(getCartSuccess({ carts: newCartsArray }));
       }
     }
   }
@@ -41,7 +34,7 @@ export const Cards = ({ setCarts, carts }: PropsCards) => {
       {products.length > 0
         ? products.map((item) => {
             return (
-              <div key={item.id} className="card w-1/5 hover:shadow-ctShadow1 transition duration-500 cursor-pointer">
+              <div key={item.id} className="card w-1/5 hover:shadow-ctShadow1 transition duration-500 cursor-pointer group">
                 <div className="image overflow-hidden h-60 ">
                   <img className="object-cover w-full h-full" src={item.image} alt="" />
                 </div>
@@ -52,15 +45,17 @@ export const Cards = ({ setCarts, carts }: PropsCards) => {
                     <span className="text-red-600 font-semibold mr-2">${item.price}</span>
                     <del className="text-slate-500 text-sm">${item.price}</del>
                   </h4>
-                  <Button
-                    onClick={() => {
-                      handleAddCart(item.id);
-                    }}
-                    fullWidth
-                    className="bg-ctGreen5 mt-2 rounded"
-                  >
-                    ADD CART
-                  </Button>
+                  <div>
+                    <Button
+                      onClick={() => {
+                        handleAddCart(item.id);
+                      }}
+                      fullWidth
+                      className="group-hover:bg-ctGreen5 mt-2 rounded duration-500"
+                    >
+                      ADD CART
+                    </Button>
+                  </div>
                 </div>
               </div>
             );

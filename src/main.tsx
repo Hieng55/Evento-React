@@ -1,18 +1,42 @@
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 import "./index.css";
+import "./app.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./components/redux/store.ts";
+import { store } from "./redux/store.ts";
+import { PrivateLayout } from "./layout/privateLayout/index.tsx";
+import { Shop } from "./components/shop/index.tsx";
+import { CartDetail } from "./components/cartDetail/index.tsx";
+import { NotFound } from "./components/notFound/index.tsx";
+import { Cart } from "./components/cart/index.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <Provider store={store}>
-        <App />
+        <PrivateLayout />
       </Provider>
     ),
+    children: [
+      {
+        path: "shop",
+        element: <Shop />,
+      },
+
+      {
+        path: "cart",
+        element: <Cart />,
+      },
+      {
+        path: "cart/:id",
+        element: <CartDetail />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
   },
 ]);
 

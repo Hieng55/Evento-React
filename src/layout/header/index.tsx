@@ -1,25 +1,22 @@
-import logo from "../../../assets/logo/logo.png";
-import { useAppDispatch, useAppSelector } from "../../Utils/redux";
+import logo from "../../assets/logo/logo.png";
 import { CartIcon } from "../../icons/info/Cart";
-import { Search } from "../../icons/info/Search";
 import { User } from "../../icons/info/User";
-import { setSearchValue } from "../../redux/action/action";
-
-import {} from "../../redux/reducer/productDataReducer";
-import { getSearchValue } from "../../redux/reducer/searchReducer";
-
 import Button from "./../../shared/button/index";
 import { Input } from "./../../shared/input/index";
-import { Cart } from "../../shop/cardProduct/interface";
-interface propsHeader {
-  carts: Cart[];
-}
-export const Header = ({ carts }: propsHeader) => {
-  console.log(carts);
+import { getSearch } from "../../redux/reducer/productSlice/index.js";
+import { useAppDispatch, useAppSelector } from "../../Utils/redux.js";
+import { Search } from "../../icons/info/Search.js";
+import { useNavigate } from "react-router";
 
+export const Header = () => {
   const menuList = ["HOME", "SHOP", "BLOG", "ABOUT US", "CONTACT"];
-  const value = useAppSelector(getSearchValue);
+  const { searchValue } = useAppSelector((state) => state.products);
+  const { carts } = useAppSelector((state) => state.carts);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  function handleCart() {
+    navigate(`/cart`);
+  }
   return (
     <>
       <div
@@ -45,12 +42,12 @@ export const Header = ({ carts }: propsHeader) => {
                 className="rounded"
                 placeholder="Search"
                 sizeInput="large"
-                value={value}
+                value={searchValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  dispatch(setSearchValue(e.target.value));
+                  dispatch(getSearch(e.target.value));
                 }}
               />
-              <Button className="px-3 py-3 rounded-md bg-ctBlue6">
+              <Button className="px-3 py-3 rounded-md bg-purple-900">
                 <Search className="w-5 h-5 text-white" />
               </Button>
             </div>
@@ -59,14 +56,14 @@ export const Header = ({ carts }: propsHeader) => {
             </Button>
 
             <div className="relative">
-              <Button className="px-3 py-3 rounded-full bg-blue-600">
+              <Button onClick={handleCart} className="px-3 py-3 rounded-full bg-blue-600">
                 <CartIcon className="w-5 h-5 text-white" />
               </Button>
               <p
                 className="bg-red-500 w-5 h-5 flex-columns justify-center 
               rounded-full absolute text-white -top-1 -right-1 text-xs"
               >
-                {carts.length}
+                {carts ? `${carts.length}` : `0`}
               </p>
             </div>
           </div>

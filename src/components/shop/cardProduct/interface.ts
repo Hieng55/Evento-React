@@ -1,4 +1,4 @@
-import { ApiResponse } from "../../services/interFaceApi";
+import { ApiResponse } from "../../../services/interFaceApi";
 
 export interface Cart extends ApiResponse {
   quantity: number;

@@ -6,8 +6,9 @@ interface PropsButton extends React.HTMLAttributes<HTMLButtonElement> {
   size?: "small" | "medium";
   icon?: React.ReactElement;
   fullWidth?: boolean;
+
 }
-const variantsStyles = cva(["border text-white"], {
+const variantsStyles = cva([`border text-white`], {
   variants: {
     type: {
       primary: "bg-ctBlue7 text-white hover:opacity-80",
@@ -29,8 +30,9 @@ const variantsStyles = cva(["border text-white"], {
 });
 
 const Button = forwardRef<HTMLButtonElement, PropsButton>(
-  ({ children, icon, type = "primary", size = "small", fullWidth, className, ...rest }, ref) => {
+  ({ className="", children, icon, type = "primary", size = "small", fullWidth, ...rest }, ref) => {
     const classStyles = variantsStyles({
+      className,
       type,
       fullWidth,
       size,

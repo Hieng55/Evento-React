@@ -48,7 +48,7 @@ export const Footer = () => {
               {listCategories.map((item) => (
                 <li
                   key={item}
-                  className="text-sm mb-2 transition duration-500 ease-in-out cursor-pointer hover:pl-1 hover:text-orange-600 hover:font-semibold "
+                  className="text-sm mb-2 duration-500 cursor-pointer  hover:pl-2 hover:text-orange-600 hover:font-semibold "
                 >
                   {item}
                 </li>

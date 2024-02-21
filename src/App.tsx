@@ -1,13 +1,13 @@
 
-import "./app.css";
-import { Shop } from "./components/shop/index";
 
-function App() {
-  return (
-    <>
-      <Shop />
-    </>
-  );
-}
+// import { Shop } from "./components/shop/index";
 
-export default App;
+// function App() {
+//   return (
+//     <>
+//       <Shop />
+//     </>
+//   );
+// }
+
+// export default App;
