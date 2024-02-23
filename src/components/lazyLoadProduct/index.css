@@ -1,0 +1,40 @@
+.card {
+  transform: translateY(50px);
+  transition: 1s ease-in-out;
+}
+.card.slide {
+  transform: translateY(0px);
+}
+.btn.animate,
+.img.scale {
+  transform: scale(1);
+}
+.text-title {
+  transform: translateX(-100px);
+  transition: 1s ease-in-out;
+}
+.text-title.left {
+  transform: translateX(0);
+}
+.btn {
+  transform: scale(0.5);
+  transition: 3s ease-in-out;
+}
+.img {
+  transform: scale(0.5);
+  transition: 1s ease-in-out;
+}
+
+.card.slide,
+.btn.animate,
+.text-title.left,
+.img.scale {
+  visibility: visible;
+  opacity: 1;
+}
+.card,
+.btn,
+.text-title {
+  opacity: 0;
+  visibility: hidden;
+}
