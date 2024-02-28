@@ -3,8 +3,7 @@ import { forwardRef, InputHTMLAttributes } from "react";
 
 interface PropsInput extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   types?: "primary" | "secondary" | "success" | "warning" | "error";
-  option?: "text" | "password";
-  size?: "sm" | "xs" | "lg";
+  size?: "small" | "normal" | "large";
   fullWidth?: boolean;
 }
 
@@ -18,9 +17,9 @@ const variantsStylesInput = cva(["border-2 border-gray-400 text-base pl-4 outlin
       error: "focus:border-red-500",
     },
     size: {
-      sm: "h-6",
-      xs: "h-13",
-      lg: "h-16",
+      small: "py-3",
+      normal: "py-4",
+      large: "py-5",
     },
     fullWidth: {
       true: "w-full",
@@ -28,11 +27,11 @@ const variantsStylesInput = cva(["border-2 border-gray-400 text-base pl-4 outlin
   },
   defaultVariants: {
     types: "primary",
-    size: "sm",
+    size: "small",
   },
 });
 
-const Input = forwardRef<HTMLInputElement, PropsInput>(({ option, className = "", types = "primary", size = "sm", fullWidth, ...rest }, ref) => {
+const Input = forwardRef<HTMLInputElement, PropsInput>(({ className, types = "primary", size = "small", fullWidth, ...rest }, ref) => {
   const classStyles = variantsStylesInput({
     className,
     types,
@@ -40,7 +39,7 @@ const Input = forwardRef<HTMLInputElement, PropsInput>(({ option, className = ""
     fullWidth,
   });
 
-  return <input  {...rest} ref={ref} className={`${classStyles} ${className}`} />;
+  return <input {...rest} ref={ref} className={`${classStyles}`} />;
 });
 Input.displayName = "Input";
 
