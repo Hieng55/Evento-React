@@ -8,15 +8,18 @@ import { PrivateLayout } from "./layout/privateLayout/index.tsx";
 import { Shop } from "./components/shop/index.tsx";
 import { CartDetail } from "./components/cartDetail/index.tsx";
 import { NotFound } from "./components/notFound/index.tsx";
-import { Cart } from "./components/cart/index.tsx";
-
+import { Carts } from "./components/cart/index.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Provider store={store}>
-        <PrivateLayout />
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <PrivateLayout />
+        </Provider>
+      </QueryClientProvider>
     ),
     children: [
       {
@@ -26,7 +29,7 @@ const router = createBrowserRouter([
 
       {
         path: "cart",
-        element: <Cart />,
+        element: <Carts />,
       },
       {
         path: "cart/:id",

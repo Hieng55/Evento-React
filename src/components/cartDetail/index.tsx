@@ -8,7 +8,7 @@ export const CartDetail = () => {
   const { carts } = useAppSelector((state) => state.carts);
 
   const cart = carts.find((cart) => cart.id == id);
-  console.log(cart);
+
 
   return (
     <div className="m-20">
